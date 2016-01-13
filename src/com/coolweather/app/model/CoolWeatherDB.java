@@ -1,9 +1,11 @@
-package model;
+package com.coolweather.app.model;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import db.CoolWeatherOpenHelper;
+import com.coolweather.app.db.CoolWeatherOpenHelper;
+
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -27,7 +29,7 @@ public class CoolWeatherDB {
 	
 	//获取CoolWeatherDB的实例
 	public synchronized static CoolWeatherDB getInstance(Context context){
-		if(coolWeatherDB!=null){
+		if(coolWeatherDB==null){
 			coolWeatherDB=new CoolWeatherDB(context);
 		}
 		return coolWeatherDB;
@@ -78,7 +80,7 @@ public class CoolWeatherDB {
 	//从数据库读取全省下所有的城市消息
 	public List<City> loadCities(int provinceId){
 	 List<City>list=new ArrayList<City>();
-	Cursor cursor=db.query("City", null,"ptovince_id=?",new String[]{String.valueOf(provinceId)},null,null,null);
+	Cursor cursor=db.query("City", null,"province_id=?",new String[]{String.valueOf(provinceId)},null,null,null);
 	if(cursor.moveToFirst()){
 		do{
 			City city=new City();
@@ -98,7 +100,7 @@ public class CoolWeatherDB {
 	public void saveCounty(County county){
 		if(county!=null){
 			ContentValues values=new ContentValues();
-			values.put("city_name", county.getCountyName());
+			values.put("county_name", county.getCountyName());
 			values.put("county_code", county.getCountyCode());
 			values.put("city_id", county.getCityId());
 			db.insert("County", null, values);

@@ -1,4 +1,4 @@
-package model;
+package com.coolweather.app.model;
 
 public class County {
 	private int id;
@@ -26,7 +26,7 @@ public class County {
 	public int getCityId() {
 		return cityId;
 	}
-	public void setCityId(int cityid) {
-		this.cityId = cityid;
+	public void setCityId(int cityId) {
+		this.cityId = cityId;
 	}
 }
